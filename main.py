@@ -20,3 +20,12 @@ rr_result = round_robin_scheduling(processes, time_quantum=2)
 
 for r in rr_result:
     print(r)
+    from src.energy_model import calculate_energy, assign_frequency
+
+print("\nEnergy Calculation:\n")
+
+for p in processes:
+    freq = assign_frequency(p['burst'])
+    energy = calculate_energy(p['burst'], freq)
+
+    print(f"Process {p['id']} → Frequency: {freq}, Energy: {energy}")
