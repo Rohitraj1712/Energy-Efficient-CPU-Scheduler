@@ -29,3 +29,17 @@ for p in processes:
     energy = calculate_energy(p['burst'], freq)
 
     print(f"Process {p['id']} → Frequency: {freq}, Energy: {energy}")
+    from src.energy_model import predict_burst, dynamic_frequency, calculate_energy
+
+print("\nDVFS + Workload Prediction:\n")
+
+previous_burst = 5  # initial assumption
+
+for p in processes:
+    predicted = predict_burst(previous_burst, p['burst'])
+    freq = dynamic_frequency(predicted)
+    energy = calculate_energy(p['burst'], freq)
+
+    print(f"Process {p['id']} → Predicted: {predicted}, Frequency: {freq}, Energy: {energy}")
+
+    previous_burst = p['burst']
